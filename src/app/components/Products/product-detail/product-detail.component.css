@@ -1,0 +1,21 @@
+h3 {
+  margin-top: 50px;
+  text-align: center;
+  color: #ffab0d;
+  padding: 20px;
+  font-size: 50px;
+}
+
+img {
+  margin-top: 100px;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+}
+
+p {
+  color: lightblue;
+  text-align: justify;
+  font-size: 28px;
+  margin-top: 100px;
+}

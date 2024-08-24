@@ -1,73 +1,8 @@
-// import { Component } from '@angular/core';
-// import { Product } from 'src/app/interfaces/product';
-// import { ProductService } from '../../../Services/product.service';
-
-// @Component({
-//   selector: 'app-list-products',
-//   templateUrl: './list-products.component.html',
-//   styleUrls: ['./list-products.component.css']
-// })
-// export class ListProductsComponent {
-
-//   clickCounts: { [key: string]: number } = {};
-
-//   arrProducts: Product[];
-//  available = true;
-//   constructor(
-//     private ProductSrv: ProductService
-
-//   ) {
-//     this.arrProducts = []
-//   }
-
-
-  
-//   ngOnInit() {
-//     try {
-     
-//       const productIds = JSON.parse(localStorage.getItem('productsBuy') || '[]');
-
-//       this.arrProducts = productIds.map((productId: string) => {
-//         return this.ProductSrv.getProdutById(productId);
-//       });
-
-//       console.log("prodId", this.arrProducts);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
- 
-//     // const response = await this.ProductSrv.getProducts();
-//     // this.arrProducts = response.results
-    
-  
-
-//   selectProduct(productId: string) {
-//     if (!this.clickCounts[productId]) {
-//       this.clickCounts[productId] = 0;
-//     }
-//     this.clickCounts[productId]++;
-    
-
-//   const productsInCart = JSON.parse(localStorage.getItem('productsBuy') || '[]');
-  
-//   productsInCart.push(productId);
-  
-//   localStorage.setItem('productsBuy', JSON.stringify(productsInCart));
-// }
-
-//     async onClick(productId: string) {
-//     const response = await this.ProductSrv.getProdutById(productId);
-//     console.log(response);
-//   }
-  
-
-// }
-
 
 import { Component } from '@angular/core';
 import { Product } from 'src/app/interfaces/product';
 import { ProductService } from '../../../Services/product.service';
+import { CartService } from 'src/app/Services/cart.service';
 
 @Component({
   selector: 'app-list-products',
@@ -75,12 +10,14 @@ import { ProductService } from '../../../Services/product.service';
   styleUrls: ['./list-products.component.css']
 })
 export class ListProductsComponent {
-clickCounts: { [key: string]: number } = {};
+
+   //public clickCounts: { [key: string]: number } = {};
+  
   arrProducts: Product[];
   available: boolean;
   constructor(
-    private ProductSrv: ProductService
-
+    public ProductSrv: ProductService,
+    public CartSrv: CartService
   ) {
     this.arrProducts = []
       this.available = true; 
@@ -90,20 +27,12 @@ clickCounts: { [key: string]: number } = {};
     const response = await this.ProductSrv.getProducts();
     this.arrProducts = response.results
     
+    this.CartSrv.loadFromLocalStorage()
   }
+
 
   selectProduct(productId: string) {
-     if (!this.clickCounts[productId]) {
-      this.clickCounts[productId] = 0;
-    }
-    this.clickCounts[productId]++;
-    
-     const productsInCart = JSON.parse(localStorage.getItem('productsBuy') || '[]');
-    productsInCart.push(productId);
-    console.log(productId)
-    localStorage.setItem('productsBuy', JSON.stringify(productsInCart));
+    this.CartSrv.addToCart(productId);
   }
-
-  
 
 }

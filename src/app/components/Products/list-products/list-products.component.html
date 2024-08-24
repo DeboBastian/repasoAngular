@@ -1,7 +1,6 @@
 <div class="products">
 
-    <div class="product" [routerLink]="['/product', product._id]" *ngFor="let product of arrProducts let index"
-        [ngClass]="{
+    <div class="product" *ngFor="let product of arrProducts let index" [ngClass]="{
                     'product-niño': product.category === 'niño',
                     'product-hombre': product.category === 'hombre',
                     'product-mujer': product.category === 'mujer'
@@ -12,14 +11,16 @@
         </div>
 
         <div class="row">
-            <div class="imag" class="col-8">
+            <div class="imag" class="col-8" [routerLink]="['/product', product._id]">
                 <img src="{{product.image}}" alt="">
             </div>
             <div class="price col-3 m-1">
                 <div *ngIf="product.active; else notAvailable" class="row click">
-                    <button class="btn btn-info" (click)="selectProduct(product._id); $event.stopPropagation();">BUY
+                    <button class="btn btn-info"
+                        (click)="selectProduct(product._id); $event.stopPropagation(); $event.preventDefault()">BUY
                         PRODUCT</button>
-                    <span class="click-counter">{{ clickCounts[product._id] || 0 }} </span>
+
+                    <span class="click-counter">{{ CartSrv.clickCounts[product._id] || 0 }} </span>
                 </div>
                 <div class="row click">
                     <ng-template #notAvailable>
@@ -29,6 +30,7 @@
                 <div class="row">
                     <p>{{product.price | currency: 'EUR'}} </p>
                 </div>
+
             </div>
 
         </div>

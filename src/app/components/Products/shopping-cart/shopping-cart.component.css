@@ -1,0 +1,71 @@
+.carrito {
+  width: 900px;
+  margin: 0 auto;
+  background-color: whitesmoke;
+}
+.productos {
+  width: 100vh;
+}
+
+.productosBuy {
+  margin: 20px;
+}
+
+img {
+  max-width: 100%;
+  width: auto;
+  height: 150px;
+  border-radius: 10px;
+}
+
+h2 {
+  font-size: 40px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: lightblue;
+  margin: 20px;
+  padding: 30px 30px 0px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+hr {
+  box-shadow: 1px 0px 4px 1px;
+}
+
+p.anular {
+  font-size: 18px;
+  margin-left: 50px;
+  cursor: pointer;
+  color: brown;
+  cursor: pointer;
+}
+
+.linea-divis {
+  width: 80%;
+  align-items: center;
+  box-shadow: none;
+}
+
+.quantity {
+  display: flex;
+}
+
+.buttonsQuant {
+  display: flex;
+  gap: 12px;
+}
+
+button {
+  width: 25px;
+  height: 25px;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0;
+}

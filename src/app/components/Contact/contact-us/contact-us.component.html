@@ -1,1 +1,82 @@
-<p>contact-us works!</p>
+<div class="container">
+    <form [formGroup]="contactForm" (ngSubmit)="sendForm()">
+        <div class="row">
+            <div class="col-4">
+                <div class="mb-3 mt-5">
+                    <label class="form-label">
+                        Name
+                    </label>
+                    <input
+                        [ngClass]="{'is-invalid': checkError('name', 'required') || checkError('name', 'minlength') }"
+                        type="text" formControlName="name" class="form-control">
+                    <p class="text-danger" *ngIf="checkError('name', 'required')">
+                        Name is required
+                    </p>
+                    <p class="text-danger" *ngIf="checkError('name', 'minlength')">
+                        Name must have min 2 characters
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">
+                        Last Name
+                    </label>
+                    <input
+                        [ngClass]="{'is-invalid': checkError('lastName', 'required') || checkError('lastName', 'minlength')}"
+                        type="text" formControlName="lastName" class="form-control">
+                    <p class="text-danger" *ngIf="checkError('lastName', 'required')">
+                        Last name is required
+                    </p>
+                    <p class="text-danger" *ngIf="checkError('name', 'minlength')">
+                        Name must have min 3 characters
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="mb-3 mt-5">
+                    <label class="form-label">
+                        Email
+                    </label>
+                    <input [ngClass]="{'is-invalid': checkError('email', 'required') || checkError('email', 'email') }"
+                        type="email" formControlName="email" class="form-control">
+                    <p class="text-danger" *ngIf="checkError('email', 'required')">
+                        Email is required
+                    </p>
+                    <p class="text-danger" *ngIf="checkError('email', 'email')">
+                        Email is required
+                    </p>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">
+                        Phone Number
+                    </label>
+                    <input [ngClass]="{'is-invalid': checkError('phone', 'required')}" type="text"
+                        formControlName="phone" class="form-control">
+                    <p class="text-danger" *ngIf="checkError('phone', 'required')">
+                        Phone number is required
+                    </p>
+                </div>
+            </div>
+
+            <div class="mb-3" class="col-8">
+                <label class="form-label">
+                    Write your question for us
+                </label>
+                <textarea [ngClass]="{'is-invalid': checkError('question', 'required')}" rows="4"
+                    formControlName="question" class="form-control"></textarea>
+                <p class="text-danger" *ngIf="checkError('question', 'required')">
+                    Question is required
+                </p>
+            </div>
+
+            <div class="col-8 offset-3">
+                <input type="submit" value="Send" class="btn btn-info mt-5 col-2" [disabled]="!contactForm.valid"
+                    [ngStyle]="{
+                'background-color': !contactForm.valid ? 'gray' : '', 
+                'border-color': !contactForm.valid ? 'gray' : ''
+                }">
+            </div>
+        </div>
+
+    </form>
+</div>

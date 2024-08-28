@@ -1,9 +1,11 @@
 <div class="products">
 
-    <div class="product" *ngFor="let product of arrProducts let index" [ngClass]="{
+    <div class="product" *ngFor="let product of arrAllProducts let index" [ngClass]="{
                     'product-niño': product.category === 'niño',
                     'product-hombre': product.category === 'hombre',
-                    'product-mujer': product.category === 'mujer'
+                    'product-mujer': product.category === 'mujer',
+                    'product-shoes': product.department === 'shoes',
+                     'product-complements': product.department === 'complements'
                 }">
         <div class="title">
             <h3>{{product.name}}</h3>

@@ -1,1 +1,40 @@
-<p>clothes works!</p>
+<div class="products">
+
+    <div class="product" *ngFor="let product of arrProducts let index" [ngClass]="{
+                    'product-niño': product.category === 'niño',
+                    'product-hombre': product.category === 'hombre',
+                    'product-mujer': product.category === 'mujer'
+                }">
+        <div class="title">
+            <h3>{{product.name}}</h3>
+            <!-- <p>Available : {{product.active}}</p> -->
+        </div>
+
+        <div class="row">
+            <div class="imag" class="col-8" [routerLink]="['/product', product._id]">
+                <img src="{{product.image}}" alt="">
+            </div>
+            <div class="price col-3 m-1">
+                <div *ngIf="product.active; else notAvailable" class="row click">
+                    <button class="btn btn-info"
+                        (click)="selectProduct(product); $event.stopPropagation(); $event.preventDefault()">BUY
+                        PRODUCT</button>
+
+                    <span class="click-counter">{{ CartSrv.clickCounts[product._id] || 0 }} </span>
+                </div>
+                <div class="row click">
+                    <ng-template #notAvailable>
+                        <p id="not-available">Product not available</p>
+                    </ng-template>
+                </div>
+                <div class="row">
+                    <p>{{product.price | currency: 'EUR'}} </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

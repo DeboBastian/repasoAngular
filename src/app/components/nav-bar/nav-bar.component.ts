@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Product } from 'src/app/interfaces/product';
 import { ProductService } from '../../Services/product.service';
+import { ListProductsComponent } from '../Products/list-products/list-products.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,35 +10,15 @@ import { ProductService } from '../../Services/product.service';
 })
 export class NavBarComponent {
 
-  arrProducts: any[] = []; // Lista original de productos
-  filteredProducts: any[] = []; // Lista de productos filtrados
-  
-
-  constructor(private productSrv: ProductService) {
-    // this.arrProducts = ProductSrv.productos
+  constructor(public productSrv: ProductService,
+    //public listService : ListProductsComponent //puedo inyectar cualquier componente para usar sus variables
+  ) {
    }
 
   
- async ngOnInit() {
-  await this.productSrv.getAll();
-    console.log(this.productSrv.productos)
-    
-      this.arrProducts = this.productSrv.productos;
-      this.filteredProducts = this.productSrv.productos;
-    
-  }
+//  async ngOnInit() {
+//   await this.productSrv.getAll();
+//     console.log(this.productSrv.productos)
+//   }
   
-  onSearch(searchProd: string): void {
-    if (searchProd) {
-      this.filteredProducts = this.arrProducts.filter(product => 
-        product.name.toLowerCase().includes(searchProd.toLowerCase())
-      );console.log('miai', this.filteredProducts);
-
-    } else {
-      this.filteredProducts = this.arrProducts; 
-    }
-  }
-
-
-
 }

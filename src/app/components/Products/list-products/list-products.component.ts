@@ -31,8 +31,8 @@ export class ListProductsComponent {
   }
 
 
-  selectProduct(productId: string) {
-    this.CartSrv.addToCart(productId);
+  selectProduct(product: Product) {
+    this.CartSrv.addToCart(product);
   }
 
 }

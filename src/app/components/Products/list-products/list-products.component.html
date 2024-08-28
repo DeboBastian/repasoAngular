@@ -17,7 +17,7 @@
             <div class="price col-3 m-1">
                 <div *ngIf="product.active; else notAvailable" class="row click">
                     <button class="btn btn-info"
-                        (click)="selectProduct(product._id); $event.stopPropagation(); $event.preventDefault()">BUY
+                        (click)="selectProduct(product); $event.stopPropagation(); $event.preventDefault()">BUY
                         PRODUCT</button>
 
                     <span class="click-counter">{{ CartSrv.clickCounts[product._id] || 0 }} </span>

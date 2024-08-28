@@ -18,11 +18,12 @@
                         <div class="row quantity">
                             <p class="col-3">Quantity of products: {{ product.quantity }}</p>
                             <div class="col-9 buttonsQuant">
-                                <button type="button" class="btn btn-danger btn-sm" (click)="addProduct(product._id)"> +
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    (click)="modifyQuantity(product._id, 'add')"> +
                                 </button>
 
                                 <button type="button" class="btn btn-danger btn-sm"
-                                    (click)="removeProduct(product._id)"> - </button>
+                                    (click)="modifyQuantity(product._id, 'substract')"> - </button>
                             </div>
                         </div>
                     </div>

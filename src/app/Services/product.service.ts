@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 import { ApiResponse } from '../interfaces/api-response';
 import { Product } from '../interfaces/product';
 import { HttpClient } from '@angular/common/http';
@@ -9,24 +9,32 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductService {
 
-  private baseUrl: string;
+  private baseUrl: string; 
   public productos: Product[] = []
-  public filteredProducts
+  productosFiltSearch: Product[] = []
   
   constructor(
     private httpClient: HttpClient
   ) { 
     this.baseUrl = "https://peticiones.online/api/products";
-    this.filteredProducts = "";
+   
   }
 
+  getProductsSearch(searchText: string) {
+    const filtro = this.productos.filter(el =>
+      el.name.toLowerCase().includes(searchText.toLowerCase())
+    )
+      this.productosFiltSearch = filtro
+ }
+ 
+  
   getByPage(page: number = 1) {
     return firstValueFrom(
       this.httpClient.get<ApiResponse>(`${this.baseUrl}?page=${page}`)
     )
   }
 
-  
+ 
   getProdutById(productId: string){
   return firstValueFrom(
       this.httpClient.get<any>(`${this.baseUrl}/${productId}`)
@@ -53,17 +61,5 @@ async getAll() {
       
 }
   
-
-  //  onSearch(searchProd: string): void {
-  //   if (searchProd) {
-  //     this.filteredProducts = this.arrProducts.filter(product => 
-  //       product.name.toLowerCase().includes(searchProd.toLowerCase())
-  //     );console.log('miai', this.filteredProducts);
-
-  //   } else {
-  //     this.filteredProducts = this.arrProducts; 
-  //   }
-  //}
-
 
 }

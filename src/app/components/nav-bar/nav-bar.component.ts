@@ -16,9 +16,10 @@ export class NavBarComponent {
    }
 
   
-//  async ngOnInit() {
-//   await this.productSrv.getAll();
-//     console.log(this.productSrv.productos)
-//   }
+ async ngOnInit() {
+  await this.productSrv.getAll();
+   console.log(this.productSrv.productos)
+
+  }
   
 }

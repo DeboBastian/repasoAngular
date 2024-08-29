@@ -1,6 +1,15 @@
+<div class="m-5 row">
+    <p class="col-2">Pagina Actual: {{ paginaActual }} / {{ numPaginas }}</p>
+    <!-- Dos botones (Anterior y Siguiente). Cambiamos el número de página cuando pulsamos en cada uno de los botones -->
+
+    <button class="btn-info col-1" (click)="cambiaPagina(false)" *ngIf="paginaActual !== 1">Anterior</button>
+    <button class="btn-info col-1" (click)="cambiaPagina(true)" *ngIf="paginaActual !== numPaginas">Siguiente</button>
+
+</div>
+
 <div class="products">
 
-    <div class="product" *ngFor="let product of arrAllProducts let index" [ngClass]="{
+    <div class="product" *ngFor="let product of ProductSrv.productosFiltSearch let index" [ngClass]="{
                     'product-niño': product.category === 'niño',
                     'product-hombre': product.category === 'hombre',
                     'product-mujer': product.category === 'mujer',

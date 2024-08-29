@@ -24,9 +24,9 @@ export class ProductService {
     const filtro = this.productos.filter(el =>
       el.name.toLowerCase().includes(searchText.toLowerCase())
     )
-      this.productosFiltSearch = filtro
+    this.productosFiltSearch = filtro;
  }
- 
+  
   
   getByPage(page: number = 1) {
     return firstValueFrom(

@@ -36,6 +36,26 @@
   transform: scale(1.1);
 }
 
+.product-niño {
+  border: 3px solid rgb(223, 240, 128);
+}
+
+.product-hombre {
+  border: 3px solid lightblue;
+}
+
+.product-mujer {
+  border: 3px solid lightcoral;
+}
+
+.product-shoes {
+  border: 3px solid gray;
+}
+
+.product-complements {
+  border: 3px solid greenyellow;
+}
+
 h3 {
   font-size: 20px;
   text-align: center;

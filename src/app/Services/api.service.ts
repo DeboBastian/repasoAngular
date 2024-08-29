@@ -43,4 +43,17 @@ export class ApiService {
        
    
   }
+
+
+  findShoes() {
+    return firstValueFrom(
+      this.httpClient.get<any>(`${APIUrl}/api/products/departmet/shoes`)
+    )
+  }
+
+  findComplements() {
+    return firstValueFrom(
+      this.httpClient.get<any>(`${APIUrl}/api/products/departmet/complements`)
+    )
+  }
 }

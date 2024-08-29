@@ -13,19 +13,36 @@ import { Route, Router } from '@angular/router';
 export class ShoppingCartComponent {
   
   prodFiltrados: Product[] = []
-   
+  total: number
   public productsInCart = JSON.parse(localStorage.getItem('productsBuy') || '{}');
   
   constructor(
     public prodSrv: ProductService,
     public carSrv: CartService,
     private router: Router
-) {
+  ) {
+    this.total = 0;
   }
 
 
   async ngOnInit() {
        this.prodFiltrados = this.carSrv.productsInCart
+    // this.total = this.prodFiltrados.reduce((sum, product) => {
+    //   const quantity = this.productsInCart[product._id] || 0;
+    //   console.log(quantity);
+      
+    //   return sum + (product.price * quantity);
+    // }, 0);
+    
+
+    this.total = this.prodFiltrados.reduce((sum, product) => {
+      const itemInCart = this.productsInCart.find((item : Product) => item._id === product._id);
+      const quantity = itemInCart ? itemInCart.quantity : 0;
+      return sum + (product.price * quantity);
+    }, 0);
+
+    console.log('Total Price:', this.total);
+  
 
    }
 

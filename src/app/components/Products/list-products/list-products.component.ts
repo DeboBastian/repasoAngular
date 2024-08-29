@@ -12,11 +12,11 @@ import { ApiService } from 'src/app/Services/api.service';
 })
 export class ListProductsComponent {
 
-   //public clickCounts: { [key: string]: number } = {};
-  
   arrAllProducts: Product[];
   available: boolean;
-
+  paginaActual: number;
+  numPaginas: number;
+  
   constructor(
     public ProductSrv: ProductService,
     public CartSrv: CartService,
@@ -24,31 +24,45 @@ export class ListProductsComponent {
   ) {
     this.arrAllProducts = []
     this.available = true; 
+    this.paginaActual = 1;
+    this.numPaginas = 0;
   }
 
   async ngOnInit() {
     try {
      const [response1, response2] = await Promise.all([
-            this.ProductSrv.getProducts(),
+            this.ProductSrv.getByPage(this.paginaActual),
             this.ApiSrv.getAllMongo()
         ]);
     
       const allProducts = [...response1.results, ...response2];
-      console.log('res1', response1.results)
-      console.log('res2', response2)
-
-      this.arrAllProducts = allProducts;
+     
+      this.ProductSrv.productosFiltSearch = allProducts;  
+      this.CartSrv.loadFromLocalStorage()
       
-    this.CartSrv.loadFromLocalStorage()
+       this.numPaginas = response1.total_pages;
     } catch (error){
        console.error('Error loading products:', error);
     }
+    
+
     
   }
 
 
   selectProduct(product: Product) {
     this.CartSrv.addToCart(product);
+  }
+
+
+  async cambiaPagina(siguiente: boolean) {
+    if (siguiente) this.paginaActual++;
+    else this.paginaActual--;
+
+    const res = await this.ProductSrv.getByPage(this.paginaActual);
+    this.arrAllProducts = [...res.results];
+    console.log('ioi', this.arrAllProducts);
+    
   }
 
 }

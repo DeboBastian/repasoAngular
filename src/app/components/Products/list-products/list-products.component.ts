@@ -30,17 +30,27 @@ export class ListProductsComponent {
 
   async ngOnInit() {
     try {
+        console.log('adios', this.ProductSrv.productosFiltSearch);
      const [response1, response2] = await Promise.all([
-            this.ProductSrv.getByPage(this.paginaActual),
+       // this.ProductSrv.getByPage(this.paginaActual),
+       this.ProductSrv.getProductsAntigua(),
             this.ApiSrv.getAllMongo()
         ]);
+   
+    console.log('hols', this.ProductSrv.productosFiltSearch);
     
-      const allProducts = [...response1.results, ...response2];
-     
-      this.ProductSrv.productosFiltSearch = allProducts;  
+       this.arrAllProducts = [...response1.results, ...response2];
+     //console.log('u', response1);
+    //   this.ProductSrv.productosFiltSearch$.subscribe(products => {
+    //     console.log('Productos filtrados recibidos:', products);
+    //     //this.ProductSrv.productosFiltSearch = products;
+    //      this.arrAllProducts = products;
+    // });
+      this.ProductSrv.productosFiltSearch = this.arrAllProducts;  
       this.CartSrv.loadFromLocalStorage()
+      //console.log('tetst',   this.ProductSrv.productosFiltSearch);
       
-       this.numPaginas = response1.total_pages;
+      //  this.numPaginas = response1.total_pages;
     } catch (error){
        console.error('Error loading products:', error);
     }
@@ -50,19 +60,28 @@ export class ListProductsComponent {
   }
 
 
+   onSearchChange(searchText: string) {
+    this.ProductSrv.getProductsSearch(searchText);
+  }
+
   selectProduct(product: Product) {
     this.CartSrv.addToCart(product);
   }
 
 
-  async cambiaPagina(siguiente: boolean) {
-    if (siguiente) this.paginaActual++;
-    else this.paginaActual--;
+  // async cambiaPagina(siguiente: boolean) {
+  //   if (siguiente) this.paginaActual++;
+  //   else this.paginaActual--;
 
-    const res = await this.ProductSrv.getByPage(this.paginaActual);
-    this.arrAllProducts = [...res.results];
-    console.log('ioi', this.arrAllProducts);
+  //   const res = await this.ProductSrv.getByPage(this.paginaActual);
+  //   this.arrAllProducts = [...res.results];
+  //   console.log('ioi', this.arrAllProducts);
     
-  }
+  // }
+
+
+    // onClick(product: Product) {
+    //   this.CartSrv.addNewProduct(product)
+    // }
 
 }

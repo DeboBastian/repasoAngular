@@ -8,15 +8,50 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
 
    clickCounts: { [key: string]: number } = {};
-    prodFiltrados: Product[] = []
+  prodFiltrados: Product[] = []
+  cartProducts: Product[] = []
+  //private _products: BehaviorSubject<Product[]> 
+ // _total: BehaviorSubject<number> = new BehaviorSubject(0)
  // _clickCounts: BehaviorSubject<{}> = new BehaviorSubject({})
 
   public productsInCart = JSON.parse(localStorage.getItem('productsBuy') || '{}')
-  constructor() { }
+  constructor() {
+    //this._products = new BehaviorSubject<Product[]>([]);
+   }
+
+  // get products() {
+  //   return this._products.asObservable()
+  // }
+
+
+  // addNewProduct(product: Product) {
+  //   this.cartProducts.push(product)
+  //   this._products.next(this.cartProducts)
+  // }
+
 
   // get clickCounts2() {
   //   return this._clickCounts.asObservable()
   // }
+
+
+//   get total() {
+//     return this._total.asObservable()
+// }
+
+  // totalReduce(total: number) {
+  //    let totalPrice = JSON.parse(localStorage.getItem('clicks') || '[]');
+  //    console.log('dsa', totalPrice);
+  
+  //    total = this.prodFiltrados.reduce((sum, product) => {
+  //      const itemInCart = this.productsInCart.find((item: Product) => item._id === product._id);
+  //      const quantity = itemInCart ? itemInCart.quantity : 0;
+  //      return sum + (product.price * quantity);
+  //    }, 0);
+  //   this._total.next(total)
+  //    console.log('Total Price222:', totalPrice);
+  // }
+
 
   addToCart(product: Product) {
     this.productsInCart = JSON.parse(localStorage.getItem('productsBuy') || '{}');

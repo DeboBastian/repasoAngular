@@ -13,7 +13,7 @@ import { Route, Router } from '@angular/router';
 export class ShoppingCartComponent {
   
   prodFiltrados: Product[] = []
-  total: number
+  //total: number
   public productsInCart = JSON.parse(localStorage.getItem('productsBuy') || '{}');
   
   constructor(
@@ -21,12 +21,14 @@ export class ShoppingCartComponent {
     public carSrv: CartService,
     private router: Router
   ) {
-    this.total = 0;
+   // this.total = 0;
   }
 
 
   async ngOnInit() {
-       this.prodFiltrados = this.carSrv.productsInCart
+     this.prodFiltrados = this.carSrv.productsInCart
+    
+
     // this.total = this.prodFiltrados.reduce((sum, product) => {
     //   const quantity = this.productsInCart[product._id] || 0;
     //   console.log(quantity);
@@ -34,18 +36,27 @@ export class ShoppingCartComponent {
     //   return sum + (product.price * quantity);
     // }, 0);
     
-
-    this.total = this.prodFiltrados.reduce((sum, product) => {
-      const itemInCart = this.productsInCart.find((item : Product) => item._id === product._id);
-      const quantity = itemInCart ? itemInCart.quantity : 0;
-      return sum + (product.price * quantity);
-    }, 0);
-
-    console.log('Total Price:', this.total);
   
-
+//     this.carSrv.products.subscribe(products => {
+//   console.log('yaaaaaaaaaa', products)
+// })
    }
 
+
+
+  // getPrice(){
+  // let totalPrice = JSON.parse(localStorage.getItem('clicks') || '[]');
+  //   console.log('dsa', totalPrice);
+    
+  //   this.total = this.prodFiltrados.reduce((sum, product) => {
+  //     const itemInCart = this.productsInCart.find((item: Product) => item._id === product._id);
+  //     const quantity = itemInCart ? itemInCart.quantity : 0;
+  //     return sum + (product.price * quantity);
+  //   }, 0);
+
+  //   console.log('Total Price222:', totalPrice);
+   
+  // }
   
    modifyQuantity(productId: string, operation: string) {
     const product = this.prodFiltrados.find((el: any) => el._id == productId)
@@ -58,11 +69,11 @@ export class ShoppingCartComponent {
     this.carSrv.clickCounts[productId] = product!.quantity
     this.carSrv.updateLocalStorage()
     localStorage.setItem('productsBuy', JSON.stringify(this.prodFiltrados))
-
+  // this.carSrv.totalReduce(this.total)
   }
 
     removeAllProduct() {
    this.carSrv.removeAllProds()
-    this.router.navigate(['/products'])
+      this.router.navigate(['/products'])
   }
 }

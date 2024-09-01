@@ -23,7 +23,7 @@ export class ClothesComponent {
 
   async ngOnInit(){
     const response = await this.ProductSrv.getProducts();
-    this.arrProducts = response.results
+    this.arrProducts = response
     
     this.CartSrv.loadFromLocalStorage()
   }

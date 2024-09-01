@@ -20,6 +20,8 @@ import { Error404Component } from './components/Error/error404/error404.componen
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PaginationPipe } from './pipes/pagination.pipe';
+import { TotalComponent } from './components/Products/total/total.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ShoesComponent,
     ComplementsComponent,
     ProductDetailComponent,
-    Error404Component
+    Error404Component,
+    PaginationPipe,
+    TotalComponent
   ],
   imports: [
     BrowserModule,
